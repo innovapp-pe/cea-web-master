@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* CSS Document */
+*
+{
+margin:0px;
+padding:0px;
+}
+body{
+	margin:0px;
+	padding:0px;
+	font-family: 'Montserrat', sans-serif !important;
+    background: #f1f4f9 !important;
+    overflow-x: hidden !important;
+}
+.maincontainer{
+	width:100%;
+	height:100%;
+}
+
+.header {
+	
+    position: relative;
+    z-index: 999;
+    padding: 30px 0px ;
+    background: #0099cc;
+}
+.hadeLogo { 
+	width: 400px;
+    height: 133px;
+    background: #fff;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+   -webkit-box-shadow: inset -5px 0px 6px -2px rgba(51,51,51,1);
+-moz-box-shadow: inset -5px 0px 6px -2px rgba(51,51,51,1);
+box-shadow: inset -5px 0px 6px -2px rgba(51,51,51,1);   -webkit-clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
+clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
+    z-index: 1;
+ }
+
+
+ul li a {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:15px;
+	
+
+}
+.mainclass{
+	margin:auto;
+	width:92%;	
+	height:1089px;
+}
+.titel{
+	padding:2px;
+	margin:15px 0px 20px 0px;
+}
+.hr {
+    margin-top: 5px;
+    margin-bottom: 30px;
+    border: 0;
+    border-top: 1px solid #e4e4e4;
+}
+
+.middel_div_right
+{
+	
+	background-color:#FFF;
+	padding:45px;
+	width:100%;
+	/*box-shadow: 5px 5px 10px grey;*/
+	float:right;
+	border:0px solid #000;
+	
+}
+
+
