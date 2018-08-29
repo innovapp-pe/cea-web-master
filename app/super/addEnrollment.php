@@ -578,15 +578,15 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     <div class="form-group">
                         <label for="certificado">Certificado:*</label>
                         <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="certificado" name="certificado" required/>
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
+                        <option value="Si">Si</option>
+                        <option value="No">No</option>
                         </select>
                     </div>
                     <div class="form-group" style="display: none;">
                         <label for="certificado_recogido">Certificado Recogido:*</label>
                         <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="certificado_recogido" name="certificado_recogido"/>
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
+                        <option value="Si">Si</option>
+                        <option value="No">No</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -724,7 +724,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
             });
         </script>
         <script>
-            $("#dni").change(function() {
+            $("#dni").on('keyup keypress change', function() {
             var dni = $("#dni").val();
           $.ajax({
               type: "POST",
@@ -741,7 +741,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           });
         </script>
         <script>
-            $("#dni").change(function() {
+            $("#dni").on('keyup keypress change', function() {
             var dni = $("#dni").val();
           $.ajax({
               type: "POST",
@@ -758,7 +758,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           });
         </script>
         <script>
-            $("#dni").change(function() {
+            $("#dni").on('keyup keypress change', function() {
             var dni = $("#dni").val();
           $.ajax({
               type: "POST",
@@ -775,7 +775,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           });
         </script>
         <script>
-            $("#dni").change(function() {
+            $("#dni").on('keyup keypress change', function() {
             var dni = $("#dni").val();
           $.ajax({
               type: "POST",
@@ -792,7 +792,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           });
         </script>
         <script>
-            $("#dni").change(function() {
+            $("#dni").on('keyup keypress change', function() {
             var dni = $("#dni").val();
           $.ajax({
               type: "POST",
@@ -810,7 +810,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           });
         </script>
         <script>
-            $("#dni").change(function() {
+            $("#dni").on('keyup keypress change', function() {
             var dni = $("#dni").val();
           $.ajax({
               type: "POST",
@@ -828,7 +828,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           });
         </script>
         <script>
-            $("#dni").change(function() {
+            $("#dni").on('keyup keypress change', function() {
             var dni = $("#dni").val();
           $.ajax({
               type: "POST",
@@ -846,7 +846,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
           });
         </script>
         <script>
-            $("#dni").change(function() {
+            $("#dni").on('keyup keypress change', function() {
             var dni = $("#dni").val();
           $.ajax({
               type: "POST",

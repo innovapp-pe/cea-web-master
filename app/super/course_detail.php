@@ -158,7 +158,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 				padding: 20px 50px;
 			}
 			.button1 {
-            display: block;
+            display: inline-block;
             margin: 0 auto;
             padding: 8px 30px;
             background-color: #9B1532;
@@ -445,14 +445,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			<br>
 			
 			<ul class="nav nav-tabs">
-			    <li class="active"><a data-toggle="tab" href="#actualizacion-datos">Actualización de Datos</a></li>
-			    <li><a data-toggle="tab" href="#matriculados">Matriculados Actuales</a></li>
+			    <li  class="active"><a data-toggle="tab" href="#matriculados">Matriculados Actuales</a></li>
+			    <li><a data-toggle="tab" href="#actualizacion-datos">Actualización de Datos</a></li>
 			    <li><a data-toggle="tab" href="#posibles-prospectos">Posibles Prospectos</a></li>
 			    <li><a data-toggle="tab" href="#menu3">Métricas</a></li>
 		    </ul>
 
 			  <div class="tab-content">
-			    <div id="actualizacion-datos" class="tab-pane fade in active">
+			    <div id="actualizacion-datos" class="tab-pane fade">
 			      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			      	<h2>Ingrese los nuevos datos del Curso:</h2>
 		    	<div class="select-boxes">
@@ -523,7 +523,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 		        </div>
         	</div>
 			    </div>
-			    <div id="matriculados" class="tab-pane fade">
+			    <div id="matriculados" class="tab-pane fade in active">
 			      <h3>Matriculados Actuales</h3>
 			      <div class="main">
 			      <table id="matriculados-table" style="text-align: center;" cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
@@ -557,14 +557,154 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			    </div>
 			    <div id="posibles-prospectos" class="tab-pane fade">
 			      <h3>Próximamente</h3>
-			      
 			    </div>
 			    <div id="menu3" class="tab-pane fade">
 			      <h3>Próximamente</h3>
-			      
 			    </div>
 			  </div>
 		</div>
+		<section>
+			<div class="modal fade" id="editar-matriculado-modal" tabindex='-1' role="dialog">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+			                 <h4 class="modal-title"></h4>
+			 
+			            </div>
+			            <div class="modal-body">
+			                <form id="form-edit-enrollment" method="post" action="server/modifyEnrollmentServer.php">
+				                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				                    <input type="hidden" id="gestionado" name="gestionado" value="1">
+				                    <div class="form-group">
+				                        <label for="dni">DNI Alumno:*</label>
+				                        <input type="number" class="form-control" readonly="readonly" name="dni" id="dni" required/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="nombre">Nombres:*</label>
+				                        <input oninput="this.value = this.value.toUpperCase()" type="name" class="form-control" id="nombre" name="nombre" required/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="apellido">Apellidos:*</label>
+				                        <input oninput="this.value = this.value.toUpperCase()" type="text" class="form-control" id="apellido" name="apellido" required/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label>Telefono:*</label>
+				                        <input type="phone" class="form-control" id="telefono" name="telefono"/>
+				                    </div>
+				                     <div class="form-group">
+				                        <label>Correo:*</label>
+				                        <input type="email" class="form-control" id="correo" name="correo"/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="universidad">Universidad:</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="universidad" id="universidad"/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="carrera">Carrera:</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="carrera" id="carrera"/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="ciclo">Ciclo en el que te encuentras:*</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="ciclo" name="ciclo"/>
+				                        <option value="1">1</option>
+				                        <option value="2">2</option>
+				                        <option value="3">3</option>
+				                        <option value="4">4</option>
+				                        <option value="5">5</option>
+				                        <option value="6">6</option>
+				                        <option value="7">7</option>
+				                        <option value="8">8</option>
+				                        <option value="9">9</option>
+				                        <option value="10">10</option>
+				                        <option value="Egresado">Egresado</option>
+				                        <option value="Tecnico">Tecnico</option>
+				                        <option value="Doctorado">Doctorado</option>
+				                        </select>
+				                    </div>
+
+				                    <div class="form-group">
+				                        <label for="distrito">Donde Vives:*</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="distrito" id="distrito"/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+				                </div>
+				                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				                        <div class="form-group">
+				                        <label for="curso">Curso:</label>
+				                        <input type="text" readonly="readonly" class="form-control" name="curso" id="curso" value="<?php echo htmlspecialchars($_GET['id_curso']); ?>" />
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="metodo_pago">Método de Pago:</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="metodo_pago" id="metodo_pago" required/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="descuento">Descuento:</label>
+				                        <input type="text" readonly="readonly" class="form-control" id="descuento" name="descuento"/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="monto_pagado">Monto Pagado:</label>
+				                        <input type="number" class="form-control" name="monto_pagado" id="monto_pagado"/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="monto_restante">Monto Restante:</label>
+				                        <input type="number" readonly="readonly" class="form-control" name="monto_restante" id="monto_restante"/>
+				                    </div>
+				                    <div class="form-group" style="display: none;">
+				                        <label for="devolucion_pagada">Monto Devuelto:</label>
+				                        <input type="number" class="form-control" name="devolucion_pagada" id="devolucion_pagada"/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="certificado">Certificado:*</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="certificado" name="certificado"/>
+				                        <option value="Si">Si</option>
+				                        <option value="No">No</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group" style="display: none;">
+				                        <label for="certificado_recogido">Certificado Recogido:*</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="certificado_recogido" name="certificado_recogido"/>
+				                        <option value="Si">Si</option>
+				                        <option value="No">No</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="canal">Canal:</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="canal" id="canal" required/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+					                <div class="form-group">
+					                  <label for="comment">Comentario:</label>
+									  <textarea oninput="this.value = this.value.toUpperCase()" placeholder="Comentario" class="form-control" rows="5" id="comment" name="comment"></textarea>
+									</div>
+				                    </div>
+				                    <div style="text-align: center;">
+				                    <button class="btn btn-info" type="submit" name="save">Actualizar Datos</button>
+				                    <button class="btn btn-danger" id="delete" type="submit">Borrar Matrícula</button>
+				                    </div>
+				                    <span id="addInfo" style="color: red; text-align: center;"></span>
+				                    <br>
+				                    <br>
+				                </div>
+				            </form>
+			            </div>
+			            <div class="modal-footer">
+			            </div>
+			        </div>
+			        <!-- /.modal-content -->
+			    </div>
+			    <!-- /.modal-dialog -->
+			</div>
+		</section>
 		<br><br>
 		<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -709,5 +849,177 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	    		.append('<option selected value="'+sede_table+'">'+sede_table+'</option>"');
 	    			}, 1000);
 		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			$('#matriculados-table').on('click', 'tr', function () {
+				var dni = $('td', this).eq(0).text();
+		        var nombre = $('td', this).eq(1).text();
+		        var apellido = $('td', this).eq(2).text();
+		        var telefono = $('td', this).eq(3).text();
+		        var correo = $('td', this).eq(4).text();
+		        var universidad = $('td', this).eq(5).text();
+		        var carrera = $('td', this).eq(6).text();
+		        var ciclo = $('td', this).eq(7).text();
+		        var distrito = $('td', this).eq(8).text();
+		        var metodo_pago = $('td', this).eq(9).text();
+		        var descuento = $('td', this).eq(10).text();
+		        var monto_pagado = $('td', this).eq(11).text();
+		        var monto_restante = $('td', this).eq(12).text();
+		        var devolucion_pagada = $('td', this).eq(13).text();
+		        var desea_certificado = $('td', this).eq(14).text();
+		        var certificado_recogido = $('td', this).eq(15).text();
+		        var canal = $('td', this).eq(16).text();
+		        var matriculado_por = $('td', this).eq(17).text();
+		        var comentario = $('td', this).eq(20).text();
+		        $('.modal-title').html("Matrícula: "+nombre +" "+ apellido +" ("+ dni+")");
+		        $('#dni').val(dni);
+		        $('#nombre').val(nombre);
+		        $('#apellido').val(apellido);
+		        $('#telefono').val(telefono);
+		        $('#correo').val(correo);
+		        $('#universidad')
+                .append('<option selected value="'+universidad+'">'+universidad+'</option>"');
+		        $('#carrera').append('<option selected value="'+carrera+'">'+carrera+'</option>"');
+		        $('#ciclo').append('<option selected value="'+ciclo+'">'+ciclo+'</option>"');
+		        $('#distrito').append('<option selected value="'+distrito+'">'+distrito+'</option>"');
+		        $('#metodo_pago').append('<option selected value="'+metodo_pago+'">'+metodo_pago+'</option>"');
+		        $('#descuento').val(descuento+"%");
+		        $('#monto_pagado').val(monto_pagado);
+		        $('#monto_restante').val(monto_restante);
+		        var monto_total = parseFloat(monto_pagado) + parseFloat(monto_restante);
+	            $("#monto_pagado").on('keyup keypress change', function()  {
+	            	var monto_pagado = $('#monto_pagado').val();
+	            monto_restante = parseFloat(monto_total) - parseFloat(monto_pagado);
+	            $('#monto_restante').val(monto_restante);
+		          });
+		        $('#devolucion_pagada').val(devolucion_pagada);
+		        $('#certificado').val(desea_certificado);
+		        $('#certificado_recogido').val(certificado_recogido);
+		        $('#canal').append('<option selected value="'+canal+'">'+canal+'</option>"');
+		        $('#matriculado_por').val(matriculado_por);
+		        $('#comment').val(comentario);
+		        $('#editar-matriculado-modal').modal("show");
+		    });
+		});
+		</script>
+		<script>
+            $("#id_curso").change(function() {
+            var curso = $("#id_curso").val();
+            var dni = $("#dni").val();
+          $.ajax({
+              type: "POST",
+              data: {curso: curso, dni: dni},
+              url: 'ajax/validateEnrollment.php',
+              success: function(data) {
+                    if (data >0) {
+                    $('.btn-info').prop('disabled', true);
+                    $(".btn-info").css("cursor", "not-allowed");
+                    $("#addInfo").html("Este alumno ya está matriculado en este curso");
+                }else{
+                    $('.btn-info').prop('disabled', false);
+                    $(".btn-info").css("cursor", "pointer");
+                    $("#addInfo").html("");
+                }
+                },
+              error: function() {
+                alert('Hubo un error');
+                }
+            });
+          });
+        </script>
+        <!-- <script>
+        	$(document).ready(function() {
+        	var monto_pagado = $("#monto_pagado").val();
+        	alert(monto_pagado);
+            var monto_restante = $('#monto_restante').val();
+            var monto_total = parseFloat(monto_pagado) + parseFloat(monto_restante);
+            $("#monto_pagado").on('keyup keypress change', function()  {
+            monto_restante = parseFloat(monto_total) - parseFloat(monto_pagado);
+            $('#monto_restante').val(monto_restante);
+	          });
+	        });
+        </script> -->
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var universidad_id = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'addProspectAjax.php',
+                data: 'universidad_id=' + universidad_id,
+                success: function(html) {
+                    $('#universidad').html(html);
+                }
+            });
+            var carrera_id = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'addProspectAjax.php',
+                data: 'carrera_id=' + carrera_id,
+                success: function(html) {
+                    $('#carrera').html(html);
+                }
+            });
+            var distrito_id = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'addProspectAjax.php',
+                data: 'distrito_id=' + distrito_id,
+                success: function(html) {
+                    $('#distrito').html(html);
+                }
+            });
+        });
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var id_curso = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/addEnrollmentAjax.php',
+                data: 'id_curso=' + id_curso,
+                success: function(html) {
+                    $('#id_curso').html(html);
+                }
+            });
+            var metodo_pago = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/addEnrollmentAjax.php',
+                data: 'metodo_pago=' + metodo_pago,
+                success: function(html) {
+                    $('#metodo_pago').html(html);
+                }
+            });
+            var canal = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/addEnrollmentAjax.php',
+                data: 'canal=' + canal,
+                success: function(html) {
+                    $('#canal').html(html);
+                }
+            });
+        });
+        </script>
+        <script type="text/javascript">
+        $("#delete").click(function(){
+        	var form = $('#form-edit-enrollment');
+            $.ajax({
+                type: 'POST',
+                data: form.serialize(),
+                url: 'server/deleteEnrollmentServer.php',
+                success: function(data) {
+                	alert("Matrícula Eliminada");
+                	document.location.href = 'courses.php';
+                }
+            });
+        });
+</script>
 </body>
 </html>

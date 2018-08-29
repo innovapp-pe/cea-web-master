@@ -493,6 +493,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     <div class="form-group">
                         <label for="premio">Premio:*</label>
                         <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="premio" id="premio"/>
+                        <option value="Nada">Nada</option>
                         <option value="Merchandising">Merchandising</option>
                         <option value="5%">5%</option>
                         <option value="10%">10%</option>
