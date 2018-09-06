@@ -548,6 +548,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                         <label for="descuento">Descuento:</label>
                         <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="descuento" id="descuento" required/>
                         <option value="0">Sin descuento</option>
+                        <option id="precio_especial" value="Precio Especial">Precio Especial</option>
                         <option value="5">5%</option>
                         <option value="10">10%</option>
                         <option value="15">15%</option>
@@ -569,7 +570,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                     </div>
                     <div class="form-group">
                         <label for="monto_restante">Monto Restante:</label>
-                        <input type="number" readonly="readonly" class="form-control" name="monto_restante" id="monto_restante"/>
+                        <input type="number"  class="form-control" name="monto_restante" id="monto_restante"/>
                     </div>
                     <div class="form-group" style="display: none;">
                         <label for="devolucion_pagada">Monto Devuelto:</label>
@@ -951,6 +952,15 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                 }
             });
         });
+        </script>
+        <script type="text/javascript">
+            $("#descuento").on('change', function() {
+             if($( "#descuento option:selected" ).val()=='Precio Especial'){
+                $('#monto_restante').attr('readonly', false);
+             }else{
+                $('#monto_restante').attr('readonly', true);
+             }   
+            });
         </script>
     </body>
     </html>

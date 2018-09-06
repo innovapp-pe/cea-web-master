@@ -24,6 +24,7 @@
 	$comentario = $_POST['comment'];
 	$update = false;
 	//echo " es $id_curso";
+		mysqli_query($link, "INSERT INTO prospectos (nombre, apellido, dni, telefono, correo, universidad, carrera, ciclo, distrito, manager_id) VALUES ('$nombre', '$apellido', '$dni', '$telefono', '$correo', '$universidad', '$carrera', '$ciclo', '$distrito', '$id')");
 		mysqli_query($link, "UPDATE cursos SET matriculados_actuales = matriculados_actuales + 1 WHERE id_curso LIKE '$id_curso' AND status=1") or die(mysqli_error($link));
 		mysqli_query($link, "INSERT INTO matriculados (id_curso, dni_alumno, nombre, apellido, telefono, correo, universidad, carrera, ciclo, distrito, metodo_pago, descuento, monto_pagado, monto_restante, certificado, canal, matriculado_por, fecha_matricula, fecha_actualizacion, comentario) VALUES 
 			('$id_curso', '$dni', '$nombre', '$apellido', '$telefono', '$correo', '$universidad', '$carrera', '$ciclo', '$distrito', '$metodo_pago', '$descuento', '$monto_pagado', '$monto_restante', '$certificado','$canal','$id_user', '$fecha_matricula', '$fecha_actualizacion', '$comentario')");

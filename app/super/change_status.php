@@ -445,14 +445,14 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			<br>
 			
 			<ul class="nav nav-tabs">
-			    <li class="active"><a data-toggle="tab" href="#actualizacion-datos">Actualización de Datos</a></li>
+			    <li class="active"><a data-toggle="tab" href="#matriculas">Matrículas</a></li>
+			    <li><a data-toggle="tab" href="#actualizacion-datos">Actualización de Datos</a></li>
 			    <li><a data-toggle="tab" href="#cursos-interes">Cursos de Interés</a></li>
-			    <li><a data-toggle="tab" href="#matriculas">Matrículas</a></li>
 			    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
 		    </ul>
 
 			  <div class="tab-content">
-			    <div id="actualizacion-datos" class="tab-pane fade in active">
+			    <div id="actualizacion-datos" class="tab-pane fade">
 			      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			      	<h2>Ingrese los nuevos Datos:</h2>
 		    	<div class="select-boxes">
@@ -554,9 +554,37 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 					</thead>
 			</table>
 			    </div>
-			    <div id="matriculas" class="tab-pane fade">
-			      <h3>Menu 2</h3>
-			      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+			 <div id="matriculas" class="tab-pane fade in active">
+			      <h3>´Histórico de Matrículas</h3>
+			      <div class="main">
+			      <table id="matriculas-table" style="text-align: center;" cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+					<thead>
+						<tr>
+							<th style="text-align: center;">ID CURSO</th>
+							<th style="text-align: center;">Nombres</th>
+							<th style="text-align: center;">Apellidos</th>
+							<th style="text-align: center;">Telefono</th>
+							<th style="text-align: center;">Correo</th>
+							<th style="text-align: center;">Universidad</th>
+							<th style="text-align: center;">Carrera</th>
+							<th style="text-align: center;">Ciclo</th>
+							<th style="text-align: center;">Distrito</th>
+							<th style="text-align: center;">Método de pago</th>
+							<th style="text-align: center;">Descuento</th>
+							<th style="text-align: center;">Monto pagado</th>
+							<th style="text-align: center;">Monto Restante</th>
+							<th style="text-align: center;">Devolución pagada</th>
+							<th style="text-align: center;">Desea Certificado</th>
+							<th style="text-align: center;">Certificado Recogido</th>
+							<th style="text-align: center;">Canal</th>
+							<th style="text-align: center;">Matriculado por</th>
+							<th style="text-align: center;">Fecha de Matrícula</th>
+							<th style="text-align: center;">Fecha de Actualización</th>
+							<th style="text-align: center;">Comentario</th>
+						</tr>
+					</thead>
+			</table>
+			</div>
 			    </div>
 			    <div id="menu3" class="tab-pane fade">
 			      <h3>Menu 3</h3>
@@ -565,6 +593,150 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			  </div>
 		</div>
 		<br><br>
+		<section>
+			<div class="modal fade" id="editar-matriculado-modal" tabindex='-1' role="dialog">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+			                 <h4 class="modal-title"></h4>
+			 
+			            </div>
+			            <div class="modal-body">
+			                <form id="form-edit-enrollment" method="post" action="server/modifyEnrollmentServer.php">
+				                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				                    <input type="hidden" id="gestionado" name="gestionado" value="1">
+				                    <div class="form-group">
+				                        <label for="dni">DNI Alumno:*</label>
+				                        <input type="number" class="form-control" readonly="readonly" name="dni" id="modal-dni" required/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="nombre">Nombres:*</label>
+				                        <input oninput="this.value = this.value.toUpperCase()" type="name" class="form-control" id="modal-nombre" name="nombre" required/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="apellido">Apellidos:*</label>
+				                        <input oninput="this.value = this.value.toUpperCase()" type="text" class="form-control" id="modal-apellido" name="apellido" required/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label>Telefono:*</label>
+				                        <input type="phone" class="form-control" id="modal-telefono" name="telefono"/>
+				                    </div>
+				                     <div class="form-group">
+				                        <label>Correo:*</label>
+				                        <input type="email" class="form-control" id="modal-correo" name="correo"/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="universidad">Universidad:</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="universidad" id="modal-universidad"/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="carrera">Carrera:</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="carrera" id="modal-carrera"/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="ciclo">Ciclo en el que te encuentras:*</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="modal-ciclo" name="ciclo"/>
+				                        <option value="1">1</option>
+				                        <option value="2">2</option>
+				                        <option value="3">3</option>
+				                        <option value="4">4</option>
+				                        <option value="5">5</option>
+				                        <option value="6">6</option>
+				                        <option value="7">7</option>
+				                        <option value="8">8</option>
+				                        <option value="9">9</option>
+				                        <option value="10">10</option>
+				                        <option value="Egresado">Egresado</option>
+				                        <option value="Tecnico">Tecnico</option>
+				                        <option value="Doctorado">Doctorado</option>
+				                        </select>
+				                    </div>
+
+				                    <div class="form-group">
+				                        <label for="distrito">Donde Vives:*</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="distrito" id="modal-distrito"/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+				                </div>
+				                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				                        <div class="form-group">
+				                        <label for="curso">Curso:</label>
+				                        <input type="text" readonly="readonly" class="form-control" name="curso" id="modal-curso" value="<?php echo htmlspecialchars($_GET['id_curso']); ?>" />
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="metodo_pago">Método de Pago:</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="metodo_pago" id="modal-metodo_pago" required/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="descuento">Descuento:</label>
+				                        <input type="text" readonly="readonly" class="form-control" id="modal-descuento" name="descuento"/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="monto_pagado">Monto Pagado:</label>
+				                        <input type="number" class="form-control" name="monto_pagado" id="modal-monto_pagado"/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="monto_restante">Monto Restante:</label>
+				                        <input type="number" readonly="readonly" class="form-control" name="monto_restante" id="modal-monto_restante"/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="devolucion_pagada">Monto Devuelto:</label>
+				                        <input type="number" class="form-control" name="devolucion_pagada" id="modal-devolucion_pagada"/>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="certificado">¿Desea Certificado?</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="modal-certificado" name="certificado"/>
+				                        <option value="Si">Si</option>
+				                        <option value="No">No</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="certificado_recogido">¿Certificado Recogido?</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="modal-certificado_recogido" name="certificado_recogido"/>
+				                        <option value="No">No</option>
+				                        <option value="Si">Si</option>
+				                        </select>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="canal">Canal:</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="canal" id="modal-canal" required/>
+				                        <option value="">Seleccione</option>
+				                        </select>
+				                    </div>
+				                    </div>
+				                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				                    	<div class="form-group">
+					                  <label for="comment">Comentario:</label>
+									  <textarea oninput="this.value = this.value.toUpperCase()" placeholder="Comentario" class="form-control" rows="5" id="modal-comment" name="comment"></textarea>
+									</div>
+				                    </div>
+				                    <div style="text-align: center;">
+				                    <button class="btn btn-info" type="submit" name="save">Actualizar Datos</button>
+				                    <button class="btn btn-danger" id="delete" type="submit">Borrar Matrícula</button>
+				                    </div>
+				                    <span id="addInfo" style="color: red; text-align: center;"></span>
+				                    <br>
+				                    <br>
+				                </div>
+				            </form>
+			            </div>
+			            <div class="modal-footer">
+			            </div>
+			        </div>
+			        <!-- /.modal-content -->
+			    </div>
+			    <!-- /.modal-dialog -->
+			</div>
+		</section>
 		<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
@@ -708,13 +880,13 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			</script>
 			<script type="text/javascript">
 				$(document).ready(function() {
-				  var dni_table=$('.odd').closest('tr').find('td:eq(0)').text();
-				  var nombre_table=$('.odd').closest('tr').find('td:eq(1)').text();
-				  var apellido_table=$('.odd').closest('tr').find('td:eq(2)').text();
-				  var telefono_table=$('.odd').closest('tr').find('td:eq(3)').text();
-				  var correo_table=$('.odd').closest('tr').find('td:eq(4)').text();
-				  var manager_table=$('.odd').closest('tr').find('td:eq(10)').text();
-				  var fecha_table=$('.odd').closest('tr').find('td:eq(11)').text();
+				  var dni_table=$('#client-to-change .odd').closest('tr').find('td:eq(0)').text();
+				  var nombre_table=$('#client-to-change .odd').closest('tr').find('td:eq(1)').text();
+				  var apellido_table=$('#client-to-change .odd').closest('tr').find('td:eq(2)').text();
+				  var telefono_table=$('#client-to-change .odd').closest('tr').find('td:eq(3)').text();
+				  var correo_table=$('#client-to-change .odd').closest('tr').find('td:eq(4)').text();
+				  var manager_table=$('#client-to-change .odd').closest('tr').find('td:eq(10)').text();
+				  var fecha_table=$('#client-to-change .odd').closest('tr').find('td:eq(11)').text();
 				  $('#dni').val(dni_table);
 				  $('#name').val(nombre_table);
 				  $('#last_name').val(apellido_table);
@@ -723,11 +895,11 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 				});
 
 	    	setTimeout(function() {
-	    		var universidad_table=$('.odd').closest('tr').find('td:eq(5)').text();
-	    		var carrera_table=$('.odd').closest('tr').find('td:eq(6)').text();
-				var ciclo_table=$('.odd').closest('tr').find('td:eq(7)').text();
-				var distrito_table=$('.odd').closest('tr').find('td:eq(8)').text();
-				var premio_table=$('.odd').closest('tr').find('td:eq(9)').text();
+	    		var universidad_table=$('#client-to-change .odd').closest('tr').find('td:eq(5)').text();
+	    		var carrera_table=$('#client-to-change .odd').closest('tr').find('td:eq(6)').text();
+				var ciclo_table=$('#client-to-change .odd').closest('tr').find('td:eq(7)').text();
+				var distrito_table=$('#client-to-change .odd').closest('tr').find('td:eq(8)').text();
+				var premio_table=$('#client-to-change .odd').closest('tr').find('td:eq(9)').text();
 	    		$('#universidad')
 	    		.append('<option selected value="'+universidad_table+'">'+universidad_table+'</option>"');
 	    		$('#carrera')
@@ -740,5 +912,191 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	    		.append('<option selected value="'+premio_table+'">'+premio_table+'</option>"');
 	    			}, 1000);
 		</script>
+		<script type="text/javascript" language="javascript" >
+			$(document).ready(function() {
+				var dni_table=$('.odd').closest('tr').find('td:eq(0)').text();
+				var dataTable1 = $('#matriculas-table').DataTable( {
+					"processing": true,
+					"serverSide": true,
+					"responsive": true,
+					"bPaginate": true,
+        			"info":     true,
+        			"bFilter": true,
+					"ajax":{
+						url :"ajax/studentEnrollmentsAjax.php", // json datasource
+						type: "POST",  // method  , by default get
+						data: {dni_table:dni_table},
+						error: function(){  // error handling
+							$(".employee-grid-error").html("");
+							$("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="8">Aun no has registrado ventas</th></tr></tbody>');
+							$("#employee-grid_processing").css("display","none");
+							
+						}
+					}
+				} );
+			} );
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			$('#matriculas-table').on('click', 'tr', function () {
+				var dni = $('#client-to-change .odd').closest('tr').find('td:eq(0)').text();
+		        var nombre = $('td', this).eq(1).text();
+		        var apellido = $('td', this).eq(2).text();
+		        var telefono = $('td', this).eq(3).text();
+		        var correo = $('td', this).eq(4).text();
+		        var universidad = $('td', this).eq(5).text();
+		        var carrera = $('td', this).eq(6).text();
+		        var ciclo = $('td', this).eq(7).text();
+		        var distrito = $('td', this).eq(8).text();
+		        var curso = $('td', this).eq(0).text();
+		        var metodo_pago = $('td', this).eq(9).text();
+		        var descuento = $('td', this).eq(10).text();
+		        var monto_pagado = $('td', this).eq(11).text();
+		        var monto_restante = $('td', this).eq(12).text();
+		        var devolucion_pagada = $('td', this).eq(13).text();
+		        var desea_certificado = $('td', this).eq(14).text();
+		        var certificado_recogido = $('td', this).eq(15).text();
+		        var canal = $('td', this).eq(16).text();
+		        var matriculado_por = $('td', this).eq(17).text();
+		        var comentario = $('td', this).eq(20).text();
+		        $('.modal-title').html("Matrícula: "+nombre +" "+ apellido +" ("+ dni+")");
+		        $('#modal-dni').val(dni);
+		        $('#modal-curso').val(curso);
+		        $('#modal-nombre').val(nombre);
+		        $('#modal-apellido').val(apellido);
+		        $('#modal-telefono').val(telefono);
+		        $('#modal-correo').val(correo);
+		        $('#modal-universidad')
+                .append('<option selected value="'+universidad+'">'+universidad+'</option>"');
+		        $('#modal-carrera').append('<option selected value="'+carrera+'">'+carrera+'</option>"');
+		        $('#modal-ciclo').append('<option selected value="'+ciclo+'">'+ciclo+'</option>"');
+		        $('#modal-distrito').append('<option selected value="'+distrito+'">'+distrito+'</option>"');
+		        $('#modal-metodo_pago').append('<option selected value="'+metodo_pago+'">'+metodo_pago+'</option>"');
+		        $('#modal-descuento').val(descuento+"%");
+		        $('#modal-monto_pagado').val(monto_pagado);
+		        $('#modal-monto_restante').val(monto_restante);
+		        var monto_total = parseFloat(monto_pagado) + parseFloat(monto_restante);
+	            $("#modal-monto_pagado").on('keyup keypress change', function()  {
+	            	var monto_pagado = $('#modal-monto_pagado').val();
+	            monto_restante = parseFloat(monto_total) - parseFloat(monto_pagado);
+	            $('#modal-monto_restante').val(monto_restante);
+		          });
+		        $('#modal-devolucion_pagada').val(devolucion_pagada);
+		        $('#modal-certificado').append('<option selected value="'+certificado+'">'+certificado+'</option>"');
+		        $('#modal-certificado_recogido').append('<option selected value="'+certificado_recogido+'">'+certificado_recogido+'</option>"');
+		        $('#modal-canal').append('<option selected value="'+canal+'">'+canal+'</option>"');
+		        $('#modal-matriculado_por').val(matriculado_por);
+		        $('#modal-comment').val(comentario);
+		        $('#editar-matriculado-modal').modal("show");
+		    });
+		});
+		</script>
+		<script>
+            $("#id_curso").change(function() {
+            var curso = $("#id_curso").val();
+            var dni = $("#dni").val();
+          $.ajax({
+              type: "POST",
+              data: {curso: curso, dni: dni},
+              url: 'ajax/validateEnrollment.php',
+              success: function(data) {
+                    if (data >0) {
+                    $('.btn-info').prop('disabled', true);
+                    $(".btn-info").css("cursor", "not-allowed");
+                    $("#addInfo").html("Este alumno ya está matriculado en este curso");
+                }else{
+                    $('.btn-info').prop('disabled', false);
+                    $(".btn-info").css("cursor", "pointer");
+                    $("#addInfo").html("");
+                }
+                },
+              error: function() {
+                alert('Hubo un error');
+                }
+            });
+          });
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var universidad_id = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'addProspectAjax.php',
+                data: 'universidad_id=' + universidad_id,
+                success: function(html) {
+                    $('#universidad').html(html);
+                }
+            });
+            var carrera_id = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'addProspectAjax.php',
+                data: 'carrera_id=' + carrera_id,
+                success: function(html) {
+                    $('#carrera').html(html);
+                }
+            });
+            var distrito_id = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'addProspectAjax.php',
+                data: 'distrito_id=' + distrito_id,
+                success: function(html) {
+                    $('#distrito').html(html);
+                }
+            });
+        });
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var id_curso = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/addEnrollmentAjax.php',
+                data: 'id_curso=' + id_curso,
+                success: function(html) {
+                    $('#id_curso').html(html);
+                }
+            });
+            var metodo_pago = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/addEnrollmentAjax.php',
+                data: 'metodo_pago=' + metodo_pago,
+                success: function(html) {
+                    $('#metodo_pago').html(html);
+                }
+            });
+            var canal = 1;
+            //alert(result_id);
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/addEnrollmentAjax.php',
+                data: 'canal=' + canal,
+                success: function(html) {
+                    $('#canal').html(html);
+                }
+            });
+        });
+        </script>
+        <script type="text/javascript">
+        $("#delete").click(function(){
+        	var form = $('#form-edit-enrollment');
+            $.ajax({
+                type: 'POST',
+                data: form.serialize(),
+                url: 'server/deleteEnrollmentServer.php',
+                success: function(data) {
+                	alert("Matrícula Eliminada");
+                	document.location.href = 'courses.php';
+                }
+            });
+        });
+</script>
 </body>
 </html>

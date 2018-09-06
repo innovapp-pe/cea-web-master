@@ -658,19 +658,19 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 				                        <label for="monto_restante">Monto Restante:</label>
 				                        <input type="number" readonly="readonly" class="form-control" name="monto_restante" id="monto_restante"/>
 				                    </div>
-				                    <div class="form-group" style="display: none;">
+				                    <div class="form-group">
 				                        <label for="devolucion_pagada">Monto Devuelto:</label>
 				                        <input type="number" class="form-control" name="devolucion_pagada" id="devolucion_pagada"/>
 				                    </div>
 				                    <div class="form-group">
-				                        <label for="certificado">Certificado:*</label>
+				                        <label for="certificado">¿Desea Certificado?</label>
 				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="certificado" name="certificado"/>
 				                        <option value="Si">Si</option>
 				                        <option value="No">No</option>
 				                        </select>
 				                    </div>
-				                    <div class="form-group" style="display: none;">
-				                        <label for="certificado_recogido">Certificado Recogido:*</label>
+				                    <div class="form-group">
+				                        <label for="certificado_recogido">¿Certificado Recogido?</label>
 				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="certificado_recogido" name="certificado_recogido"/>
 				                        <option value="Si">Si</option>
 				                        <option value="No">No</option>
@@ -682,7 +682,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 				                        <option value="">Seleccione</option>
 				                        </select>
 				                    </div>
-					                <div class="form-group">
+				                    </div>
+				                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				                    	<div class="form-group">
 					                  <label for="comment">Comentario:</label>
 									  <textarea oninput="this.value = this.value.toUpperCase()" placeholder="Comentario" class="form-control" rows="5" id="comment" name="comment"></textarea>
 									</div>
@@ -927,18 +929,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
             });
           });
         </script>
-        <!-- <script>
-        	$(document).ready(function() {
-        	var monto_pagado = $("#monto_pagado").val();
-        	alert(monto_pagado);
-            var monto_restante = $('#monto_restante').val();
-            var monto_total = parseFloat(monto_pagado) + parseFloat(monto_restante);
-            $("#monto_pagado").on('keyup keypress change', function()  {
-            monto_restante = parseFloat(monto_total) - parseFloat(monto_pagado);
-            $('#monto_restante').val(monto_restante);
-	          });
-	        });
-        </script> -->
         <script type="text/javascript">
         $(document).ready(function() {
             var universidad_id = 1;
