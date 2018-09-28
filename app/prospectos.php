@@ -475,11 +475,13 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			$(document).ready(function() {
 				var dataTable1 = $('#prospectos-grid').DataTable( {
 					"processing": true,
+					"ordering": true,
 					"serverSide": true,
 					"responsive": true,
 					"bPaginate": true,
         			"info":     true,
         			"bFilter": true,
+        			"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 					"ajax":{
 						url :"prospectos-data.php", // json datasource
 						type: "post",  // method  , by default get
