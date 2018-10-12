@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Grupo CEA | Contacto</title>
+    <title>¡Éxito!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="swiper-master/dist/css/swiper.min.css">
@@ -980,177 +980,20 @@ side of the browser view port. This has the side-effect of having an horizontal 
     </div>
     <br>
     <br>
-    <section style="padding-bottom: 30px; background-color: white;">
-        <div class="container">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center; margin-top: 2%;">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 to-center" style="padding-left: 15px;">
-                        <h3 style="color: #4D0515; font-family: Avenir-Heavy; font-weight: 300;">GRACIAS POR PONERTE EN CONTACTO CON NOSOTROS</h3>
-                        <br>
-                        <br>
-                        <h4 style="color: #4D0515;">Nuestro personal está altamente capacitado para <br class="br">
-                        resolver cualquiera de tus dudas. <br><br>
-                        informes@grupocea.com.pe <br>
-                        947 909 357 <br>
-                        (01) 512 7235 <br><br>
-                        Av. Óscar R. Benavides (Ex Colonial) 2509, <br>
-                        Cercado de Lima <br>
-                        Referencia Alt. Puente "Roma" de la Av. Óscar R. Benavides <br>
-                        a 2 cuadras de la Av. Universitaria 
-                        </h4>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        <img class="grayscale" src="images/contactanos.png" style="display: block; margin: 0 auto; width: 80%;">
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5%;">
-                    <form method="post" action="registroweb.php">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 1%;">
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label>Nombres:</label>
-                                <input style="border-color: #711228;" type="name" name="name" class="form-control" id="name" required/>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label>Apellidos:</label>
-                                <input style="border-color: #711228;" type="text" name="last_name" class="form-control" id="last_name" required/>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 1%;">
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label>DNI:</label>
-                                <input style="border-color: #711228;" type="number" name="dni" class="form-control" id="dni" required/>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label>Teléfono:</label>
-                                <input style="border-color: #711228;" type="phone" name="phone" class="form-control" id="phone" required/>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 1%;">
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="email">Correo Electrónico:</label>
-                                <input style="border-color: #711228;" type="email" name="email" class="form-control" id="email" required/>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label>Distrito:</label>
-                                <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="distrito" id="distrito" required/>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 1%;">
-                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label>Universidad:</label>
-                                <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="universidad" id="universidad" required/>
-                                </select>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label>Carrera:</label>
-                                <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="carrera" id="carrera" required/>
-                                </select>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label>Ciclo:</label>
-                                <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="ciclo" name="ciclo" required/>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="Egresado">Egresado</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 1%;">
-                            <label>Mensaje:</label>
-                            <textarea style="border-color: #711228;" name="mensaje" class="form-control" id="mensaje" rows="5"></textarea>
-                            <br>
-                            <button type="submit" class="button1">Enviar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-2"></div>
+    <div class="container col-md-8">
+        <br>
+        <span class="animated fadeInDown"><img src="app/images/alert.png" style="display: block; margin: 0 auto; width: 6em;"></span>
+        <h3 class="animated fadeInDown" style="text-align: center;">
+            Algo ha salido mal.
         <br>
         <br>
-        <br>
-        <br>
-    </section>
-    <section>
-        <footer style="background-image: url(images/footer-background.jpg); background-position: left; background-repeat: no-repeat; background-size: cover; position: relative; z-index: 1; clear: both;">
-            <div class="container" style="padding-top: 5%; padding-bottom: 5%;">
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 to-center" style="color: white; padding-right: 4em; padding-left: 4em;">
-                    <h3 style="font-family: Avenir-Heavy;">Ubícanos</h3>
-                    <div class="map-responsive">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.9088640537198!2d-77.07422489999999!3d-12.0497913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c936c9b060ff%3A0x44beadc4e48f9d08!2sGrupo+CEA+S.A.C.!5e0!3m2!1ses!2spe!4v1532359227449" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    </div>
-                    <h5>
-                       Av. Óscar R. Benavides (Ex Av. Colonial)
-                        2509 - Cercado de Lima 
-                        (Alt. del Puente "Roma", a 2 cuadras 
-                        del cruce de Av. Universitaria con Av. Colonial).
-                    </h5>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 to-center" style="color: white;">
-                    <h3 style="font-family: Avenir-Heavy;">Horario de Atención</h3>
-                    <h5>Oficina:<br style="line-height: 150%;">
-                        Lun-Vie: 9:30am - 6:00pm<br style="line-height: 120%;">
-                        Sábados: 10:00am - 1:00pm<br style="line-height: 120%;">
-                         <br>
-                        Central Telefónica: <br style="line-height: 150%;">
-                        Lun-Vie: 9:30am - 5:30pm<br style="line-height: 120%;">
-                        Sábados: 10:00am - 12:30pm<br style="line-height: 120%;">
-                    </h5>
-                    <h4>
-                    <a href="tel:+51947909357" style="color: white; outline: none; text-decoration: none; display: inline-block;"><span style="display: inline-block;"><i class="fas fa-mobile-alt"></i></span> 947909357</a>&nbsp;&nbsp;
-                    <a href="tel:015127235" style="color: white; outline: none; text-decoration: none; display: inline-block;"><span style="display: inline-block;"><i class="fas fa-fax"></i></span> 5127235</a>
-                    </h4>
-                    <h3 style="font-family: Avenir-Heavy;">Suscríbete</h3>
-                    <h5>
-                        <form action="new_suscriber.php" method="POST">
-                            <input style="background-color: white; color: gray; height: 30px; border-radius: 20px; outline: none; width: 80%;" type="email" name="email" placeholder="  Correo" required/>
-                            <input style="margin-left: -58px; height: 28px; border-radius: 20px; outline: none; background-color: #4F0C1D;" type="submit" name="submit" value="Enviar">
-                        </form>
-                    </h5>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 to-center" style="color: white;">
-                    <h3 style="font-family: Avenir-Heavy;">Nuestros Cursos</h3>
-                    <h5>
-                        <a href="" style="color: white; outline: none;">
-                            - Cursos de Contabilidad
-                        </a><br><br>    
-                         <a href="" style="color: white; outline: none;">
-                            - Cursos de Economía
-                        </a><br><br>
-                         <a href="" style="color: white; outline: none;">
-                            - Cursos de Gestión Pública
-                        </a><br><br>
-                         <a href="" style="color: white; outline: none;">
-                            - Cursos de Recursos Humanos
-                        </a><br><br> 
-                    </h5>
-                    <h3 style="font-family: Avenir-Heavy;">Nuestras Redes</h3>
-                    <h3>
-                        <a style="color: white; outline: none; text-decoration: none;" href="https://www.facebook.com/grupoceaperu/" target="_blank">
-                            <span style="display:inline-block"><i class="fab fa-facebook-square"></i></span>
-                        </a>&nbsp;
-                        <a style="color: white; outline: none; text-decoration: none;" href="" target="_blank">
-                            <span style="display:inline-block"><i class="fab fa-instagram"></i></span>
-                        </a>&nbsp;
-                        <a style="color: white; outline: none; text-decoration: none;" href="" target="_blank">
-                            <span style="display:inline-block"><i class="fab fa-youtube"></i></span>
-                        </a>&nbsp;
-                        <a style="color: white; outline: none; text-decoration: none;" href="http://bit.ly/whatsappcea" target="_blank">
-                            <span style="display:inline-block"><i class="fab fa-whatsapp"></i></span>
-                        </a>           
-                    </h3>
-                </div>
-            </div>
-        </footer>
-    </section>
+        <a style="outline: none; text-decoration: none;" href="index.html">
+            <button class="button1">Regresar al Inicio</button>
+        </a>
+    </div>
+    <br>
+    <br>
     <section id="BotonFlotante">
         <div class="right-corder-container" style="right: 0; position: fixed; margin-right: 20px; z-index: 10000;">
             <button class="right-corder-container-button" style="outline: 0 !important;">
