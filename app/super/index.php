@@ -505,16 +505,16 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
                 </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" style="padding-top: 10px; padding-bottom: 10px;">
-                <div class="skew four col" onclick="location.href='courses.php';">
+                <div class="skew four col" onclick="location.href='call.php';">
                     <div class="box">
                         <span class="original">
                             <br><br>
-                          <h1>Programación</h1>
-                          <p>Ver Calendario</p>
+                          <h1>Llamadas</h1>
+                          <p>Gestionados = ?</p>
                         </span>
                         <div class="overlay">
-                            <i class="fas fa-calendar-alt fa-3x" aria-hidden="true"></i>
-                            <span style="font-size: 1.5em;">&nbsp;Ver programación</span>
+                            <i class="fas fa-phone-volume fa-3x" aria-hidden="true"></i>
+                            <span style="font-size: 1.5em;">&nbsp;Llamar Ahora</span>
                         </div>
                     </div>
                 </div>

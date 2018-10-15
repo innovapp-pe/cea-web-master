@@ -1,7 +1,14 @@
 <?php
 // Initialize the session
 session_start();
- 
+//Include database configuration file
+include('config.php');
+
+//Get all t_contacto data
+$query = $link->query("SELECT * FROM tipo_contacto WHERE status = 1 ORDER BY nombre ASC");
+
+//Count total number of rows
+$rowCount = $query->num_rows;
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   header("location: ../login.php");
@@ -25,6 +32,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
 		<link rel="shortcut icon" href="../images/favicon.png">
 		<style>
 		a {
@@ -225,15 +235,16 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 				padding: 10px 50px;
 			}
 			.button1{
-				display: block;
+				display: inline-block;
 				margin: 0 auto;
-				padding: 18px 50px;
-				background-color: #337AB7;
+				padding: 5px 20px;
+				background-color: #9B1532;
 				color: white;
+				border-color: transparent;
 			}
 
 			.button1:hover{
-				background-color: #286090;
+				background-color: #781C31;
 			}
 			.button-logout {
 			     font-size: 12px;
@@ -441,17 +452,17 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 		<div class="container">
 		    <div id="prospectos">
 		      <div class="header animated fadeInDown"><h1><b>Lista de alumnos interesados</b></h1></div>
-				<div class="container">
-					<div class="main">
-						<form class="form-inline" id="encontrarInteresados">
+				<div class="container" style="text-align: center;">
+					<form class="form-inline" id="encontrarInteresados">
 						<div class="form-group">
 	                        <label for="id_curso">Curso:</label>
 	                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="id_curso" id="id_curso" required/>
 	                        <option value="">Seleccione</option>
 	                        </select>
                     	</div>
-						  <button type="submit" class="btn btn-info" style="margin-top: 25px;">Encontrar</button>
-						</form>
+						  <button type="submit" class="button1">Encontrar</button>
+					</form>
+					<div class="main">
 						<br><br>
 					<table id="interesados-grid"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
 							<thead>
@@ -504,7 +515,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			 
 			            </div>
 			            <div class="modal-body">
-			                <form id="form-edit-enrollment" method="post" action="server/modifyEnrollmentServer.php">
+			                <form id="form-edit-enrollment" method="post" action="server/CallServer.php">
 				                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				                    <input type="hidden" id="gestionado" name="gestionado" value="1">
@@ -546,7 +557,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 				                        <input type="text" class="form-control" readonly="readonly" id="distrito" name="distrito"/>
 				                    </div>
 				                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-				                        <label for="curso">Curso:</label>
+				                        <label for="curso">Curso de interés:</label>
 				                        <input type="text" readonly="readonly" class="form-control" name="curso" id="curso" value="" />
 				                    </div>
 				                </div>
@@ -555,16 +566,39 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 				                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				                        <label for="tipo_contacto">Tipo de Contacto:</label>
 				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" name="tipo_contacto" id="tipo_contacto" required/>
-				                        <option value="Contacto Efectivo">Contacto Efectivo</option>
-				                        <option value="Contcto no Efectivo">Contcto no Efectivo</option>
-				                        <option value="No Contacto">No Contacto</option>
+				                        <option value="">Tipo de contacto*</option>
+					                    <?php
+								        if($rowCount > 0){
+								            while($row = $query->fetch_assoc()){ 
+								                echo '<option value="'.$row['nombre'].'">'.$row['nombre'].'</option>';
+								            }
+								        }else{
+								            echo '<option value="">Tipo de contacto no disponible</option>';
+								        }
+								        ?>
 				                        </select>
 				                    </div>
 				                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				                        <label for="resultado">Resultado</label>
+				                        <label for="resultado">Resultado:</label>
 				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="resultado" name="resultado"/>
+				                        <option>Seleccione un Tipo de contacto</option>
 				                        </select>
 				                    </div>
+				                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				                        <label for="observacion">Observacion:</label>
+				                        <select class="select col-xs-12 col-sm-12 col-md-12 col-lg-12" id="observacion" name="observacion"/>
+				                        <option>Seleccione un Tipo de contacto</option>
+				                        </select>
+				                    </div>
+				                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				                    <label for="fecha_agendado">Fecha de Agendado:</label>
+				                    <div class='input-group date' id='datetimepicker1'>
+					                    <input placeholder="Haga click sobre el almanaque de la derecha -->" id="fecha_agendado" name="fecha_agendado" type='text' class="form-control" />
+					                    <span class="input-group-addon">
+					                        <span class="glyphicon glyphicon-calendar"></span>
+					                    </span>
+					                </div>
+					                </div>
 				                    </div>
 				                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				                    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -572,9 +606,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 									  <textarea oninput="this.value = this.value.toUpperCase()" placeholder="Comentario" class="form-control" rows="5" id="comment" name="comment"></textarea>
 									</div>
 				                    </div>
-				                    <div style="text-align: center;">
-				                    <button class="btn btn-info" type="submit" name="save">Actualizar Datos</button>
-				                    <button class="btn btn-danger" id="delete" type="submit">Borrar Matrícula</button>
+				                    <div style="text-align: center; padding-top: 20px;">
+				                    <button class="button1" style="margin-top: 20px;" type="submit" name="save">Enviar</button>
 				                    </div>
 				                    <span id="addInfo" style="color: red; text-align: center;"></span>
 				                    <br>
@@ -595,6 +628,11 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 		<script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/es-us.js"></script>
+		<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/en-au.js"></script> -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function () {
 			  // Listen to submit event on the <form> itself!
@@ -691,6 +729,13 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			    });
 			</script>
 			<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+				    format: 'YYYY-MM-DD HH:mm:ss'
+				});
+            });
+        	</script>
+			<script type="text/javascript">
 			$(document).ready(function() {
 			$('#interesados-grid').on('click', 'tr', function () {
 				var curso = $('td', this).eq(0).text();
@@ -712,7 +757,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 		        var canal = $('td', this).eq(17).text();
 		        var matriculado_por = $('td', this).eq(18).text();
 		        var comentario = $('td', this).eq(10).text();
-		        $('.modal-title').html("Matrícula: "+nombre +" "+ apellido +" ("+ dni+")");
+		        $('.modal-title').html("Interesado: "+nombre +" "+ apellido +" ("+ dni+")");
 		        $('#dni').val(dni);
 		        $('#curso').val(curso);
 		        $('#nombre').val(nombre);
@@ -742,5 +787,50 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 		    });
 		});
 		</script>
+				<script type="text/javascript">
+				    $(document).ready(function() {
+				        $('#tipo_contacto').on('change', function() {
+				            var tipo_contacto_id = $(this).val();
+				            if (tipo_contacto_id) {
+				                $.ajax({
+				                    type: 'POST',
+				                    url: 'ajax/CallAjax.php',
+				                    data: 'tipo_contacto_id=' + tipo_contacto_id,
+				                    success: function(html) {
+				                        $('#resultado').html(html);
+				                        $('#observacion').html('<option value="">Seleccione un resultado primero</option>');
+				                    }
+				                });
+				            } else {
+				                $('#resultado').html('<option value="">Tipo de contacto primero</option>');
+				                $('#observacion').html('<option value="">Resultado primero</option>');
+				            }
+				        });
+
+				        $('#resultado').on('change', function() {
+				            var resultado_id = $(this).val();
+				            if (resultado_id) {
+				                $.ajax({
+				                    type: 'POST',
+				                    url: 'ajax/CallAjax.php',
+				                    data: 'resultado_id=' + resultado_id,
+				                    success: function(html) {
+				                        $('#observacion').html(html);
+				                    }
+				                });
+				            } else {
+				                $('#observacion').html('<option value="">Resultado primero</option>');
+				            }
+				        });
+
+				    });
+    	</script>
+    	<script type="text/javascript">
+			 	$(document).ready(function() {
+				    $('.select').select2({
+				    theme: "bootstrap"
+				});
+				});
+		 </script>
 </body>
 </html>
