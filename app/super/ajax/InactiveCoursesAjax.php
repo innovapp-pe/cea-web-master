@@ -32,7 +32,7 @@ $totalFiltered = $totalData;  // when there is no search parameter then total nu
 
 
 $sql = "SELECT id_curso, nombre, capacidad, profesor, sede, fecha_inicio, fecha_fin, horario, costo, matriculados_actuales, creado_por, status";
-$sql.=" FROM cursos";
+$sql.=" FROM cursos WHERE status = 0";
 if( !empty($requestData['search']['value']) ) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
     $sql.=" AND ( id_curso LIKE '".$requestData['search']['value']."%' ";    
     $sql.=" OR nombre LIKE '".$requestData['search']['value']."%' ";

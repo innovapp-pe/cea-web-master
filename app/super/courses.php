@@ -439,32 +439,67 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         </nav>
 
 		<div class="container">
-		    <div id="cursos">
-		      <div class="header animated fadeInDown"><h1><b>Cursos</b></h1></div>
-				<div class="container">
-					<div class="main">
-					<table id="courses-grid"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
-							<thead>
-								<tr>
-									<th style="text-align: center;">id_curso</th>
-									<th style="text-align: center;">Nombre</th>
-									<th style="text-align: center;">Capacidad</th>
-									<th style="text-align: center;">Profesor</th>
-									<th style="text-align: center;">Sede</th>
-									<th style="text-align: center;">Fecha Inicio</th>
-									<th style="text-align: center;">Fecha Fin</th>
-									<th style="text-align: center;">Horario</th>
-									<th style="text-align: center;">Costo</th>
-									<th style="text-align: center;">Matriculados Actuales</th>
-									<th style="text-align: center;">Creado por</th>
-									<th style="text-align: center;">Status</th>
-								</tr>
-							</thead>
-					</table>
+
+			  <ul class="nav nav-tabs">
+			    <li class="active"><a data-toggle="tab" href="#cursos-activos">Cursos Activos</a></li>
+			    <li><a data-toggle="tab" href="#cursos-finalizados">Cursos Finalizados</a></li>
+			  </ul>
+
+			  <div class="tab-content">
+			    <div id="cursos-activos" class="tab-pane fade in active">
+			      <div class="header animated fadeInDown"><h1><b>Cursos Activos</b></h1></div>
+					<div class="container">
+						<div class="main">
+						<table id="active-courses-grid"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+								<thead>
+									<tr>
+										<th style="text-align: center;">id_curso</th>
+										<th style="text-align: center;">Nombre</th>
+										<th style="text-align: center;">Capacidad</th>
+										<th style="text-align: center;">Profesor</th>
+										<th style="text-align: center;">Sede</th>
+										<th style="text-align: center;">Fecha Inicio</th>
+										<th style="text-align: center;">Fecha Fin</th>
+										<th style="text-align: center;">Horario</th>
+										<th style="text-align: center;">Costo</th>
+										<th style="text-align: center;">Matriculados Actuales</th>
+										<th style="text-align: center;">Creado por</th>
+										<th style="text-align: center;">Status</th>
+									</tr>
+								</thead>
+						</table>
+						</div>
 					</div>
-				</div>
-				<br><br>
-		    </div>
+					<br><br>
+			    </div>
+			    <div id="cursos-finalizados" class="tab-pane fade">
+			      <div class="header animated fadeInDown"><h1><b>Cursos Finalizados</b></h1></div>
+					<div class="container">
+						<div class="main">
+						<table id="inactive-courses-grid"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+								<thead>
+									<tr>
+										<th style="text-align: center;">id_curso</th>
+										<th style="text-align: center;">Nombre</th>
+										<th style="text-align: center;">Capacidad</th>
+										<th style="text-align: center;">Profesor</th>
+										<th style="text-align: center;">Sede</th>
+										<th style="text-align: center;">Fecha Inicio</th>
+										<th style="text-align: center;">Fecha Fin</th>
+										<th style="text-align: center;">Horario</th>
+										<th style="text-align: center;">Costo</th>
+										<th style="text-align: center;">Matriculados Actuales</th>
+										<th style="text-align: center;">Creado por</th>
+										<th style="text-align: center;">Status</th>
+									</tr>
+								</thead>
+						</table>
+						</div>
+					</div>
+					<br><br>
+			    </div>
+			  </div>
+		    
 		</div>
 		<br><br>
 		<section id="BotonFlotante">
@@ -487,7 +522,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 		<script type="text/javascript" language="javascript" >
 			$(document).ready(function() {
-				var dataTable1 = $('#courses-grid').DataTable( {
+				var dataTable1 = $('#active-courses-grid').DataTable( {
 					"processing": true,
 					"serverSide": true,
 					"responsive": true,
@@ -495,7 +530,25 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         			"info":     true,
         			"bFilter": true,
 					"ajax":{
-						url :"ajax/coursesAjax.php", // json datasource
+						url :"ajax/ActiveCoursesAjax.php", // json datasource
+						type: "post",  // method  , by default get
+						error: function(){  // error handling
+							$(".employee-grid-error").html("");
+							$("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="8">Aun no has registrado ventas</th></tr></tbody>');
+							$("#employee-grid_processing").css("display","none");
+							
+						}
+					}
+				} );
+				var dataTable2 = $('#inactive-courses-grid').DataTable( {
+					"processing": true,
+					"serverSide": true,
+					"responsive": true,
+					"bPaginate": true,
+        			"info":     true,
+        			"bFilter": true,
+					"ajax":{
+						url :"ajax/InactiveCoursesAjax.php", // json datasource
 						type: "post",  // method  , by default get
 						error: function(){  // error handling
 							$(".employee-grid-error").html("");
@@ -552,40 +605,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 			    }, function() {
 			        $(".long-text").removeClass("show-long-text");
 			    });
-			</script>
-			<script type="text/javascript">
-				$(document).ready(function() {
-	    			setTimeout(function() {
-	        		var rowCount_prospectos = $('#courses-grid >tbody >tr').length;
-	        		var prospectos_faltantes = 200 - rowCount_prospectos; 
-	        		$('#prospectos_actuales').text(rowCount_prospectos);
-	    	var oilCanvas = document.getElementById("oilChart");
-			Chart.defaults.global.defaultFontSize = 15;
-
-			var oilData = {
-			    labels: [
-			        "Prospectos",
-			        "Faltantes",
-			    ],
-			    datasets: [
-			        {
-			            data: [rowCount_prospectos, prospectos_faltantes],
-			            backgroundColor: [
-			                "#347BB7",
-			                "gray"
-			            ]
-			        }]
-			};
-
-			var pieChart = new Chart(oilCanvas, {
-			  type: 'pie',
-			  responsive: true,
-			  maintainAspectRatio: false,
-			  data: oilData
-			});
-	    		}, 2000);
-
-			});
 			</script>
 			<script type="text/javascript">
 			$(document).ready(function() {
